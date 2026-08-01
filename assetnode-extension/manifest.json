@@ -1,0 +1,80 @@
+{
+  "manifest_version": 3,
+  "name": "AssetNode Setup Guide",
+  "description": "Interactive setup guides for configuring your IT integrations with AssetNode. Powered by the IT Nerd 🤓",
+  "version": "1.0.0",
+  "icons": {
+    "16": "src/assets/icons/icon-16.png",
+    "48": "src/assets/icons/icon-48.png",
+    "128": "src/assets/icons/icon-128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://portal.azure.com/*",
+    "https://*.jamfcloud.com/*",
+    "https://admin.kandji.io/*",
+    "https://*.kandji.io/*",
+    "https://*.personio.de/*",
+    "https://*.bamboohr.com/*",
+    "https://app.hibob.com/*",
+    "https://console.cloud.google.com/*",
+    "https://admin.google.com/*",
+    "https://*.mosyle.com/*",
+    "https://app.asset-node.com/*",
+    "https://*.asset-node.com/*",
+    "https://*.onelogin.com/*",
+    "https://*.okta.com/*",
+    "https://console.jumpcloud.com/*",
+    "http://localhost:5173/*",
+    "http://localhost:3001/*"
+  ],
+  "background": {
+    "service_worker": "src/background/service-worker.ts"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "AssetNode Setup Guide"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://portal.azure.com/*",
+        "https://*.jamfcloud.com/*",
+        "https://admin.kandji.io/*",
+        "https://*.kandji.io/*",
+        "https://*.personio.de/*",
+        "https://*.bamboohr.com/*",
+        "https://app.hibob.com/*",
+        "https://console.cloud.google.com/*",
+        "https://admin.google.com/*",
+        "https://*.mosyle.com/*",
+        "https://*.onelogin.com/*",
+        "https://*.okta.com/*",
+        "https://console.jumpcloud.com/*"
+      ],
+      "js": ["src/content/guide-runner.ts"],
+      "css": ["src/content/guide-overlay.css", "src/content/auto-pilot-overlay.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://app.asset-node.com/*",
+        "https://*.asset-node.com/*",
+        "http://localhost:5173/*"
+      ],
+      "js": ["src/content/assetnode-bridge.ts"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

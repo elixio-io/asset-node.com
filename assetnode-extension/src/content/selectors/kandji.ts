@@ -1,0 +1,58 @@
+import type { ExtensionGuideStep } from '../../lib/types'
+
+export const kandjiSteps: ExtensionGuideStep[] = [
+  {
+    id: 'kandji-1-login',
+    selector: 'body',
+    title: 'Log in to Kandji',
+    description: 'Navigate to your Kandji admin portal and sign in with your administrator credentials.',
+    nerdMessage: 'Let\'s set up Kandji to sync your Apple devices! 🍎',
+    timeout: 5000,
+  },
+  {
+    id: 'kandji-2-settings',
+    selector: 'a[href*="settings"], [data-testid="settings-nav"], nav a:has(svg[data-icon="gear"])',
+    title: 'Go to Settings',
+    description: 'Click on "Settings" in the left sidebar.',
+    side: 'right',
+    nerdMessage: 'Head over to settings to find the API section 🔧',
+    timeout: 10000,
+  },
+  {
+    id: 'kandji-3-api-access',
+    selector: 'a[href*="api"], a[href*="access"], [data-testid="api-token"]',
+    title: 'Navigate to Access → API Token',
+    description: 'Go to the "Access" section and find "API Token".',
+    side: 'right',
+    nerdMessage: 'We need an API token so AssetNode can talk to Kandji 🔑',
+    timeout: 10000,
+  },
+  {
+    id: 'kandji-4-create-token',
+    selector: 'button[aria-label*="Add"], button:has(span:contains("Add")), [data-testid="create-token"]',
+    title: 'Create a new API token',
+    description: 'Click "Add" to create a new API token. Name it "AssetNode Integration".',
+    side: 'bottom',
+    nerdMessage: 'Create a token named "AssetNode Integration" 📝',
+    timeout: 10000,
+  },
+  {
+    id: 'kandji-5-copy-token',
+    selector: 'input[readonly], [data-testid="token-value"], pre, code',
+    title: 'Copy the API token',
+    description: 'Copy the generated API token. You\'ll need this in the next step.',
+    note: 'Store this token securely — it is only shown once.',
+    side: 'bottom',
+    nerdMessage: '⚠️ Copy this token NOW! It won\'t be shown again! 📋',
+    timeout: 15000,
+  },
+  {
+    id: 'kandji-6-enter-in-assetnode',
+    selector: 'body',
+    title: '🎉 Enter credentials in AssetNode',
+    description: 'Go to AssetNode → Settings → MDM → Kandji. Paste the API token and your Kandji subdomain, then click Save.',
+    fallbackUrl: 'https://app.asset-node.com/settings#kandjiSection',
+    nerdMessage: 'Paste the token into AssetNode and your Apple devices will start syncing! 🎉',
+    timeout: 5000,
+  },
+]

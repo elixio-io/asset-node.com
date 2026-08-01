@@ -1,0 +1,109 @@
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - PORT=${PORT:-3001}
+      - MONGODB_URI=${MONGODB_URI:-mongodb://assetnode:changeme@mongodb-dev:27017/assetnode_dev?authSource=admin}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - JWT_ACCESS_EXPIRY=${JWT_ACCESS_EXPIRY:-15m}
+      - JWT_REFRESH_EXPIRY=${JWT_REFRESH_EXPIRY:-7d}
+      - APP_URL=${APP_URL:-https://dev.asset-node.com}
+      - BASE_DOMAIN=${BASE_DOMAIN:-asset-node.com}
+      - CORS_ORIGIN=${CORS_ORIGIN:-https://dev.asset-node.com}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - SMTP_HOST=${SMTP_HOST:-smtp.gmail.com}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_SECURE=${SMTP_SECURE:-false}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASS=${SMTP_PASS:-}
+      - SMTP_FROM=${SMTP_FROM:-noreply@asset-node.com}
+    expose:
+      - "3001"
+    depends_on:
+      mongodb-dev:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3001/health" ]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.assetnode-dev-http.rule=Host(`dev.asset-node.com`)"
+      - "traefik.http.routers.assetnode-dev-http.entrypoints=http"
+      - "traefik.http.routers.assetnode-dev-https.rule=Host(`dev.asset-node.com`)"
+      - "traefik.http.routers.assetnode-dev-https.entrypoints=https"
+      - "traefik.http.routers.assetnode-dev-https.tls=true"
+      - "traefik.http.routers.assetnode-dev-https.tls.certresolver=letsencrypt"
+      - "traefik.http.services.assetnode-dev.loadbalancer.server.port=3001"
+
+  mongodb-dev:
+    image: mongo:7
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME:-assetnode}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:-changeme}
+    volumes:
+      - dev-mongo-data:/data/db
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 5
+    restart: unless-stopped
+
+  chainiq-dev:
+    build:
+      context: ./chainiq
+      dockerfile: Dockerfile
+    environment:
+      - PORT=4000
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DATABASE_URL=${CHAINIQ_DATABASE_URL:-ecto://postgres:postgres@postgres-chainiq-dev:5432/chainiq_dev}
+      - SECRET_KEY_BASE=${CHAINIQ_SECRET_KEY_BASE:-dev-secret-key-base-not-for-production}
+      - MIX_ENV=prod
+      - PHX_SERVER=true
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres-chainiq-dev:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:4000/api/health" ]
+      interval: 15s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+    restart: unless-stopped
+
+  postgres-chainiq-dev:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=${CHAINIQ_DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${CHAINIQ_DB_PASS:-postgres}
+      - POSTGRES_DB=${CHAINIQ_DB_NAME:-chainiq_dev}
+    ports:
+      - "5432:5432"
+    volumes:
+      - dev-pg-chainiq-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${CHAINIQ_DB_USER:-postgres} -d ${CHAINIQ_DB_NAME:-chainiq_dev}" ]
+      interval: 10s
+      timeout: 5s
+      start_period: 10s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  dev-mongo-data:
+    driver: local
+  dev-pg-chainiq-data:
+    driver: local

@@ -1,0 +1,356 @@
+
+
+.workflow-node {
+  min-width: 240px;
+  max-width: 320px;
+  border-radius: 10px;
+  border: 1px solid var(--an-border-dark, #27272a);
+  background: var(--an-surface-elevated, #18181b);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Inter', -apple-system, sans-serif;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  cursor: grab;
+}
+
+.workflow-node:hover {
+  border-color: var(--an-border-subtle, #3f3f46);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.workflow-node:active {
+  cursor: grabbing;
+}
+
+
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px 10px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--an-border-dark, #27272a);
+}
+
+.node-header i {
+  font-size: 14px;
+}
+
+.node-header.trigger {
+  background: rgba(59, 130, 246, 0.08);
+  color: var(--an-cobalt, #3b82f6);
+}
+
+.node-header.condition {
+  background: rgba(249, 115, 22, 0.08);
+  color: var(--an-orange, #f97316);
+}
+
+.node-header.action {
+  background: rgba(16, 185, 129, 0.08);
+  color: var(--an-emerald, #10b981);
+}
+
+
+.node-body {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.node-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--an-text-muted, #8b8b94);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: -4px;
+}
+
+
+.node-select,
+.node-select-small {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--an-border-dark, #27272a);
+  background: var(--an-surface-dark, #09090b);
+  color: var(--an-text-primary, #fafafa);
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1.4;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b8b94' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 28px;
+}
+
+.node-select:hover,
+.node-select-small:hover {
+  border-color: var(--an-border-subtle, #3f3f46);
+}
+
+.node-select:focus,
+.node-select-small:focus {
+  border-color: var(--an-cobalt, #3b82f6);
+}
+
+.node-select option {
+  background: var(--an-surface-elevated, #18181b);
+  color: var(--an-text-primary, #fafafa);
+}
+
+.node-select-small {
+  width: 70px;
+  flex-shrink: 0;
+  font-weight: 600;
+  text-align: center;
+  padding-right: 10px;
+  background-image: none;
+}
+
+.node-input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--an-border-dark, #27272a);
+  background: var(--an-surface-dark, #09090b);
+  color: var(--an-text-primary, #fafafa);
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1.4;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.node-input::placeholder {
+  color: var(--an-text-muted, #8b8b94);
+}
+
+.node-input:hover {
+  border-color: var(--an-border-subtle, #3f3f46);
+}
+
+.node-input:focus {
+  border-color: var(--an-cobalt, #3b82f6);
+}
+
+.node-textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--an-border-dark, #27272a);
+  background: var(--an-surface-dark, #09090b);
+  color: var(--an-text-primary, #fafafa);
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1.5;
+  outline: none;
+  resize: vertical;
+  min-height: 48px;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.node-textarea::placeholder {
+  color: var(--an-text-muted, #8b8b94);
+}
+
+.node-textarea:hover {
+  border-color: var(--an-border-subtle, #3f3f46);
+}
+
+.node-textarea:focus {
+  border-color: var(--an-cobalt, #3b82f6);
+}
+
+.node-hint {
+  font-size: 11px;
+  color: var(--an-text-muted, #8b8b94);
+  line-height: 1.4;
+}
+
+.node-copy-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.node-check-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--an-text-primary, #fafafa);
+  cursor: pointer;
+}
+
+.node-check-row input[type='checkbox'] {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--an-cobalt, #3b82f6);
+  cursor: pointer;
+}
+
+.node-copy-row .node-input {
+  font-size: 11px;
+  color: var(--an-text-muted, #8b8b94);
+  cursor: text;
+}
+
+.node-copy-btn {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--an-border-dark, #27272a);
+  background: var(--an-surface-dark, #09090b);
+  color: var(--an-text-muted, #8b8b94);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.node-copy-btn:hover {
+  border-color: var(--an-cobalt, #3b82f6);
+  color: var(--an-text-primary, #fafafa);
+}
+
+
+.condition-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+
+.branch-labels {
+  position: absolute;
+  right: -20px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  pointer-events: none;
+}
+
+.branch-true {
+  font-size: 13px;
+  color: var(--an-emerald, #10b981);
+  font-weight: 700;
+}
+
+.branch-false {
+  font-size: 13px;
+  color: var(--an-red, #ef4444);
+  font-weight: 700;
+}
+
+.branch-loop {
+  font-size: 10px;
+  color: var(--an-orange, #f97316);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.branch-done {
+  font-size: 10px;
+  color: var(--an-text-muted, #8b8b94);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+
+.vue-flow__handle {
+  width: 14px !important;
+  height: 14px !important;
+  border: 2px solid var(--an-border-subtle, #3f3f46) !important;
+  background: var(--an-surface-elevated, #18181b) !important;
+  border-radius: 50% !important;
+  transition: all 0.15s ease !important;
+  z-index: 10 !important;
+}
+
+.vue-flow__handle:hover {
+  width: 18px !important;
+  height: 18px !important;
+  background: var(--an-cobalt, #3b82f6) !important;
+  border-color: var(--an-cobalt, #3b82f6) !important;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4) !important;
+}
+
+.vue-flow__handle-right {
+  right: -8px !important;
+}
+
+.vue-flow__handle-left {
+  left: -8px !important;
+}
+
+.vue-flow__edge {
+  cursor: crosshair !important;
+}
+
+.vue-flow__edge-path {
+  stroke-width: 2.5 !important;
+}
+
+.vue-flow__edge-interaction {
+  stroke-width: 20px !important;
+  stroke: transparent !important;
+  cursor: crosshair !important;
+}
+
+.vue-flow__edge:hover .vue-flow__edge-path {
+  stroke-width: 3.5 !important;
+  filter: drop-shadow(0 0 4px currentColor) !important;
+}
+
+.vue-flow__node.selected .workflow-node {
+  border-color: var(--an-cobalt, #3b82f6) !important;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15), 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+.vue-flow__minimap {
+  background: var(--an-surface-elevated, #18181b) !important;
+  border: 1px solid var(--an-border-dark, #27272a) !important;
+  border-radius: 8px !important;
+}
+
+.vue-flow__controls {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.vue-flow__controls-button {
+  background: var(--an-surface-elevated, #18181b) !important;
+  border: 1px solid var(--an-border-dark, #27272a) !important;
+  color: var(--an-text-primary, #fafafa) !important;
+  border-radius: 6px !important;
+  width: 32px !important;
+  height: 32px !important;
+  margin-bottom: 4px !important;
+  transition: all 0.15s !important;
+}
+
+.vue-flow__controls-button:hover {
+  background: var(--an-surface-dark, #09090b) !important;
+  border-color: var(--an-border-subtle, #3f3f46) !important;
+}
+
+.vue-flow__controls-button svg {
+  fill: var(--an-text-subtle, #a1a1aa) !important;
+}

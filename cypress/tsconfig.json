@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "es5",
+      "dom",
+      "dom.iterable"
+    ],
+    "types": [
+      "cypress"
+    ],
+    "moduleResolution": "node"
+  },
+  "include": [
+    "**/*.ts"
+  ]
+}

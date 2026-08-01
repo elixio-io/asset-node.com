@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AssetNode YouTube Assets</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #1a1a2e;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      padding: 40px;
+    }
+
+    #banner {
+      width: 2560px;
+      height: 1440px;
+      background: #09090b;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    #banner::after {
+      content: '';
+      position: absolute;
+      bottom: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1600px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(16, 185, 129, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .banner-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      z-index: 1;
+    }
+
+    .banner-logo {
+      width: 200px;
+      height: 200px;
+    }
+
+    .banner-brand {
+      font-size: 120px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -2px;
+    }
+
+    .banner-tagline {
+      font-size: 48px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 2px;
+    }
+
+    .banner-url {
+      font-size: 36px;
+      font-weight: 600;
+      color: #10b981;
+      margin-top: 20px;
+    }
+
+    .node-deco {
+      position: absolute;
+      border-radius: 50%;
+      background: #10b981;
+      z-index: 0;
+    }
+
+    .node-1 {
+      width: 16px;
+      height: 16px;
+      top: 300px;
+      left: 200px;
+      opacity: 0.3;
+    }
+
+    .node-2 {
+      width: 24px;
+      height: 24px;
+      top: 500px;
+      right: 300px;
+      opacity: 0.2;
+    }
+
+    .node-3 {
+      width: 12px;
+      height: 12px;
+      bottom: 400px;
+      left: 400px;
+      opacity: 0.25;
+    }
+
+    .node-4 {
+      width: 20px;
+      height: 20px;
+      top: 250px;
+      right: 500px;
+      opacity: 0.15;
+    }
+
+    .node-5 {
+      width: 14px;
+      height: 14px;
+      bottom: 300px;
+      right: 200px;
+      opacity: 0.2;
+    }
+
+    .node-6 {
+      width: 10px;
+      height: 10px;
+      top: 600px;
+      left: 600px;
+      opacity: 0.35;
+    }
+
+    .line-deco {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.15), transparent);
+      z-index: 0;
+    }
+
+    .line-1 {
+      width: 400px;
+      top: 400px;
+      left: 100px;
+      transform: rotate(-15deg);
+    }
+
+    .line-2 {
+      width: 350px;
+      bottom: 350px;
+      right: 150px;
+      transform: rotate(10deg);
+    }
+
+    .line-3 {
+      width: 500px;
+      top: 700px;
+      left: 300px;
+      transform: rotate(-5deg);
+    }
+
+    #profile {
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle at center, #111214 0%, #09090b 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-logo {
+      width: 500px;
+      height: 500px;
+    }
+
+    .label {
+      color: #aaa;
+      font-size: 24px;
+      font-weight: 600;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 8px 20px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="label">Banner — 2560 × 1440px</div>
+  <div id="banner">
+    <div class="node-deco node-1"></div>
+    <div class="node-deco node-2"></div>
+    <div class="node-deco node-3"></div>
+    <div class="node-deco node-4"></div>
+    <div class="node-deco node-5"></div>
+    <div class="node-deco node-6"></div>
+    <div class="line-deco line-1"></div>
+    <div class="line-deco line-2"></div>
+    <div class="line-deco line-3"></div>
+
+    <div class="banner-content">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" class="banner-logo">
+        <path d="M60 30 L90 75 L30 75 Z" stroke="#10b981" stroke-width="4" stroke-linejoin="round" opacity="0.4" />
+        <path d="M60 65 L60 30 M60 65 L90 75 M60 65 L30 75" stroke="#10b981" stroke-width="4" stroke-linecap="round" />
+        <circle cx="60" cy="30" r="8" fill="#09090b" stroke="#10b981" stroke-width="4" />
+        <circle cx="90" cy="75" r="8" fill="#09090b" stroke="#10b981" stroke-width="4" />
+        <circle cx="30" cy="75" r="8" fill="#09090b" stroke="#10b981" stroke-width="4" />
+        <circle cx="60" cy="65" r="10" fill="#10b981" />
+      </svg>
+      <div class="banner-brand">AssetNode</div>
+      <div class="banner-tagline">IT Asset Management, Simplified</div>
+      <div class="banner-url">asset-node.com</div>
+    </div>
+  </div>
+
+  <div class="label">Profile Picture — 800 × 800px (YouTube will crop to circle)</div>
+  <div id="profile">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" class="profile-logo">
+      <path d="M60 25 L95 80 L25 80 Z" stroke="#10b981" stroke-width="5" stroke-linejoin="round" opacity="0.5" />
+      <line x1="60" y1="62" x2="60" y2="25" stroke="#10b981" stroke-width="5" stroke-linecap="round" />
+      <line x1="60" y1="62" x2="95" y2="80" stroke="#10b981" stroke-width="5" stroke-linecap="round" />
+      <line x1="60" y1="62" x2="25" y2="80" stroke="#10b981" stroke-width="5" stroke-linecap="round" />
+      <circle cx="60" cy="25" r="10" fill="#10b981" />
+      <circle cx="95" cy="80" r="10" fill="#10b981" />
+      <circle cx="25" cy="80" r="10" fill="#10b981" />
+      <circle cx="60" cy="62" r="13" fill="#10b981" />
+    </svg>
+  </div>
+
+  <script>
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    script.onload = async () => {
+      const banner = document.getElementById('banner');
+      const bannerCanvas = await html2canvas(banner, { width: 2560, height: 1440, scale: 1, backgroundColor: '#09090b' });
+      const bannerLink = document.createElement('a');
+      bannerLink.download = 'youtube-banner-2560x1440.png';
+      bannerLink.href = bannerCanvas.toDataURL('image/png');
+      bannerLink.textContent = '⬇ Download Banner (2560×1440)';
+      bannerLink.style.cssText = 'color: #10b981; font-size: 32px; font-weight: 700; display: block; text-align: center; margin: 20px;';
+      banner.parentNode.insertBefore(bannerLink, banner.nextSibling);
+
+      const profile = document.getElementById('profile');
+      const profileCanvas = await html2canvas(profile, { width: 800, height: 800, scale: 1, backgroundColor: '#09090b' });
+      const profileLink = document.createElement('a');
+      profileLink.download = 'youtube-profile-800x800.png';
+      profileLink.href = profileCanvas.toDataURL('image/png');
+      profileLink.textContent = '⬇ Download Profile Pic (800×800)';
+      profileLink.style.cssText = 'color: #10b981; font-size: 32px; font-weight: 700; display: block; text-align: center; margin: 20px;';
+      profile.parentNode.insertBefore(profileLink, profile.nextSibling);
+    };
+    document.head.appendChild(script);
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - PORT=${PORT:-3001}
+      - MONGODB_URI=${MONGODB_URI:-mongodb://assetnode:changeme@mongodb-test:27017/assetnode_test?authSource=admin}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - JWT_ACCESS_EXPIRY=${JWT_ACCESS_EXPIRY:-15m}
+      - JWT_REFRESH_EXPIRY=${JWT_REFRESH_EXPIRY:-7d}
+      - APP_URL=${APP_URL:-https://test.asset-node.com}
+      - BASE_DOMAIN=${BASE_DOMAIN:-asset-node.com}
+      - CORS_ORIGIN=${CORS_ORIGIN:-https://test.asset-node.com}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - SMTP_HOST=${SMTP_HOST:-smtp.gmail.com}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_SECURE=${SMTP_SECURE:-false}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASS=${SMTP_PASS:-}
+      - SMTP_FROM=${SMTP_FROM:-noreply@asset-node.com}
+    expose:
+      - "3001"
+    depends_on:
+      mongodb-test:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3001/health" ]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.assetnode-test-http.rule=Host(`test.asset-node.com`)"
+      - "traefik.http.routers.assetnode-test-http.entrypoints=http"
+      - "traefik.http.routers.assetnode-test-https.rule=Host(`test.asset-node.com`)"
+      - "traefik.http.routers.assetnode-test-https.entrypoints=https"
+      - "traefik.http.routers.assetnode-test-https.tls=true"
+      - "traefik.http.routers.assetnode-test-https.tls.certresolver=letsencrypt"
+      - "traefik.http.services.assetnode-test.loadbalancer.server.port=3001"
+
+  mongodb-test:
+    image: mongo:7
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME:-assetnode}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:-changeme}
+    volumes:
+      - test-mongo-data:/data/db
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  test-mongo-data:
+    driver: local

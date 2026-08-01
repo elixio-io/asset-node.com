@@ -1,0 +1,60 @@
+# AssetNode — IT-Asset-Management für den Mittelstand
+# https://asset-node.com
+
+User-agent: *
+Crawl-delay: 1
+
+# Public marketing pages — indexable
+Allow: /
+Allow: /pricing
+Allow: /integrations
+Allow: /marketplace
+Allow: /api-docs
+Allow: /about
+Allow: /blog
+Allow: /blog/*
+Allow: /changelog
+Allow: /careers
+Allow: /faq
+Allow: /privacy-policy
+Allow: /terms
+Allow: /imprint
+
+# Auth pages — not indexable
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /accept-invite
+Disallow: /auth/
+
+# Authenticated app routes — app content, not for search engines
+Disallow: /dashboard
+Disallow: /hardware
+Disallow: /assignments
+Disallow: /available
+Disallow: /defective
+Disallow: /employees
+Disallow: /settings
+Disallow: /reports
+Disallow: /audit
+Disallow: /admin
+Disallow: /ai-logs
+Disallow: /privacy
+Disallow: /guides/
+Disallow: /departments
+Disallow: /locations
+Disallow: /manufacturers
+Disallow: /procurement
+Disallow: /licenses
+Disallow: /consumables
+Disallow: /maintenance
+Disallow: /audits
+Disallow: /recycle-bin
+Disallow: /my-items
+
+# API routes
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://asset-node.com/sitemap.xml

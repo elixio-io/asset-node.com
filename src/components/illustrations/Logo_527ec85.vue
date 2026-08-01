@@ -1,0 +1,211 @@
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+
+interface Props {
+  size?: number | string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  size: 160,
+})
+
+const dim = typeof props.size === 'number' ? `${props.size}px` : props.size
+const widthDim = typeof props.size === 'number' ? `${props.size * 2}px` : `calc(${props.size} * 2)`
+
+const codeText = ref('{...asset, node}')
+let intervalId: ReturnType<typeof setInterval> | null = null
+
+onMounted(() => {
+  const states = [
+    '{...asset, node}', '{...asset, node}', '{...asset, node}', '{...asset, node}', '{...asset, node}', '{...asset, node}',
+    '{...asset, node', '{...asset, nod', '{...asset, no', '{...asset, n', '{...asset, ', '{...asset,', '{...asset}',
+    '{...Asset}', '{..Asset}', '{.Asset}', '{Asset}',
+    '{AssetN}', '{AssetNo}', '{AssetNod}', '{AssetNode}',
+    '{AssetNode}', '{AssetNode}', '{AssetNode}', '{AssetNode}', '{AssetNode}', '{AssetNode}', '{AssetNode}', '{AssetNode}', '{AssetNode}', '{AssetNode}',
+    '{AssetNod}', '{AssetNo}', '{AssetN}', '{Asset}',
+    '{...Asset}', '{...asset}', '{...asset,}', '{...asset, n}', '{...asset, no}', '{...asset, nod}', '{...asset, node}'
+  ]
+  let i = 0
+  intervalId = setInterval(() => {
+    i = (i + 1) % states.length
+    codeText.value = states[i]
+  }, 100)
+})
+
+onUnmounted(() => {
+  if (intervalId) clearInterval(intervalId)
+})
+</script>
+
+<template>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 400 200"
+    :width="widthDim"
+    :height="dim"
+    fill="none"
+    class="assetnode-logo"
+    aria-label="AssetNode logo"
+    role="img"
+  >
+    <defs>
+      <linearGradient id="mon-body" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#cbd5e1" />
+        <stop offset="100%" stop-color="#94a3b8" />
+      </linearGradient>
+
+      <linearGradient id="mon-dark" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#475569" />
+        <stop offset="100%" stop-color="#1e293b" />
+      </linearGradient>
+
+      <radialGradient id="screen-glow" cx="50%" cy="50%" r="75%">
+        <stop offset="0%" stop-color="#0f172a" />
+        <stop offset="100%" stop-color="#020617" />
+      </radialGradient>
+
+      <linearGradient id="skin-peach" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffedd5" />
+        <stop offset="100%" stop-color="#fdba74" />
+      </linearGradient>
+
+      <linearGradient id="skin-shadow" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fdba74" />
+        <stop offset="100%" stop-color="#ea580c" />
+      </linearGradient>
+
+      <linearGradient id="shirt" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#0f172a" />
+        <stop offset="100%" stop-color="#1e293b" />
+      </linearGradient>
+
+      <linearGradient id="hair" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#292524" />
+        <stop offset="100%" stop-color="#0c0a09" />
+      </linearGradient>
+
+      <linearGradient id="screen-glare" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12" />
+        <stop offset="50%" stop-color="#ffffff" stop-opacity="0.0" />
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0.04" />
+      </linearGradient>
+
+      <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#020617" flood-opacity="0.4" />
+      </filter>
+
+      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
+      <filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+        <feMerge>
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+
+    <path d="M 230 185 L 330 185 L 310 150 L 250 150 Z" fill="url(#mon-dark)" filter="url(#drop-shadow)" />
+    <rect x="220" y="185" width="120" height="8" rx="4" fill="#334155" filter="url(#drop-shadow)" />
+    <rect x="265" y="130" width="30" height="30" fill="#1e293b" />
+    <line x1="270" y1="130" x2="270" y2="160" stroke="#0f172a" stroke-width="3" />
+    <line x1="280" y1="130" x2="280" y2="160" stroke="#0f172a" stroke-width="3" />
+    <line x1="290" y1="130" x2="290" y2="160" stroke="#0f172a" stroke-width="3" />
+
+    <rect x="200" y="15" width="180" height="135" rx="12" fill="url(#mon-dark)" filter="url(#drop-shadow)" />
+
+    <rect x="185" y="5" width="180" height="135" rx="12" fill="url(#mon-body)" />
+
+    <rect x="195" y="15" width="160" height="115" rx="6" fill="#0f172a" />
+
+    <rect x="200" y="20" width="150" height="105" rx="4" fill="url(#screen-glow)" />
+
+    <path d="M 200 20 L 350 20 L 350 50 L 200 100 Z" fill="url(#screen-glare)" />
+
+    <circle cx="310" cy="130" r="3" fill="#94a3b8" />
+    <circle cx="322" cy="130" r="3" fill="#94a3b8" />
+    <circle cx="334" cy="130" r="3" fill="#94a3b8" />
+    <rect x="345" y="128" width="8" height="4" rx="2" fill="#10b981" filter="url(#glow)" />
+
+    <g filter="url(#neon-glow)">
+      <text x="275" y="75" font-family="monospace" font-size="14" fill="#10b981" font-weight="bold" text-anchor="middle">{{ codeText }}</text>
+    </g>
+    <text x="275" y="75" font-family="monospace" font-size="14" fill="#ecfdf5" font-weight="bold" text-anchor="middle">{{ codeText }}</text>
+
+
+    <path d="M 35 200 C 35 120, 165 120, 165 200 Z" fill="url(#shirt)" filter="url(#drop-shadow)" />
+    <path d="M 65 160 L 135 160" stroke="#f472b6" stroke-width="3" opacity="0.8" />
+    <path d="M 55 175 L 145 175" stroke="#a78bfa" stroke-width="3" opacity="0.8" />
+    <path d="M 45 190 L 155 190" stroke="#38bdf8" stroke-width="3" opacity="0.8" />
+
+    <path d="M 75 125 Q 100 145 125 125 L 125 135 Q 100 155 75 135 Z" fill="#020617" />
+
+    <rect x="85" y="90" width="30" height="35" fill="url(#skin-shadow)" />
+
+    <path d="M 80 120 Q 100 155, 120 120" fill="none" stroke="#fbbf24" stroke-width="4" filter="url(#drop-shadow)" />
+    <path d="M 80 120 Q 100 155, 120 120" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3,2" />
+    <polygon points="93,142 107,142 100,152" fill="#fbbf24" filter="url(#drop-shadow)" />
+
+    <circle cx="65" cy="70" r="10" fill="url(#skin-shadow)" />
+    <circle cx="135" cy="70" r="10" fill="url(#skin-shadow)" />
+
+    <ellipse cx="100" cy="65" rx="36" ry="50" fill="url(#skin-peach)" filter="url(#drop-shadow)" />
+
+    <path d="M 60 70 C 50 20, 150 20, 140 70 C 145 40, 130 10, 100 10 C 70 10, 55 40, 60 70 Z" fill="url(#hair)" />
+    <rect x="62" y="55" width="8" height="25" fill="url(#hair)" rx="4" />
+    <rect x="130" y="55" width="8" height="25" fill="url(#hair)" rx="4" />
+
+    <path d="M 90 20 C 60 20, 50 35, 50 45 L 150 45 C 150 35, 140 20, 110 20 Z" fill="#0f172a" />
+    <path d="M 120 40 L 160 48 L 150 35 Z" fill="#f472b6" />
+    <circle cx="100" cy="18" r="4" fill="#38bdf8" />
+
+    <path d="M 64 45 L 94 45 L 94 70 Q 79 80, 64 70 Z" fill="#0891b2" fill-opacity="0.5" stroke="#f472b6" stroke-width="4" stroke-linejoin="round" />
+    <path d="M 106 45 L 136 45 L 136 70 Q 121 80, 106 70 Z" fill="#0891b2" fill-opacity="0.5" stroke="#f472b6" stroke-width="4" stroke-linejoin="round" />
+    <polygon points="68,50 85,50 75,65" fill="#ffffff" opacity="0.4" />
+    <polygon points="110,50 127,50 117,65" fill="#ffffff" opacity="0.4" />
+    <line x1="94" y1="50" x2="106" y2="50" stroke="#f472b6" stroke-width="4" />
+    <line x1="58" y1="50" x2="64" y2="50" stroke="#f472b6" stroke-width="4" />
+    <line x1="136" y1="50" x2="142" y2="50" stroke="#f472b6" stroke-width="4" />
+
+    <circle cx="82" cy="62" r="4" fill="#0f172a" />
+    <circle cx="118" cy="62" r="4" fill="#0f172a" />
+    <circle cx="83" cy="60" r="1.5" fill="#ffffff" />
+    <circle cx="119" cy="60" r="1.5" fill="#ffffff" />
+
+    <path d="M 82 85 Q 100 78, 118 85 Q 100 92, 82 85 Z" fill="url(#hair)" />
+    <path d="M 88 98 Q 100 108, 112 98 Q 100 94, 88 98 Z" fill="url(#hair)" />
+
+    <path d="M 88 91 Q 100 98, 112 91 Z" fill="#ffffff" stroke="#0f172a" stroke-width="1.5" />
+
+
+
+
+
+    <path d="M 125 140 L 145 165" stroke="url(#shirt)" stroke-width="24" stroke-linecap="round" filter="url(#drop-shadow)" />
+    <path d="M 140 160 L 190 145" stroke="url(#skin-peach)" stroke-width="14" stroke-linecap="round" filter="url(#drop-shadow)" />
+
+    <rect x="168" y="140" width="10" height="18" fill="#334155" transform="rotate(-15 173 149)" />
+    <rect x="171" y="146" width="10" height="10" rx="2" fill="#fbbf24" stroke="#eab308" stroke-width="1" />
+    <circle cx="176" cy="151" r="3" fill="#0f172a" />
+    <line x1="174" y1="151" x2="178" y2="151" stroke="#10b981" stroke-width="1.5" />
+    <circle cx="195" cy="143" r="9" fill="url(#skin-peach)" />
+    <path d="M 195 143 L 210 120" stroke="url(#skin-peach)" stroke-width="5" stroke-linecap="round" />
+    <path d="M 190 135 L 195 125" stroke="url(#skin-peach)" stroke-width="4" stroke-linecap="round" />
+    <path d="M 190 148 L 205 140" stroke="#d4a373" stroke-width="2.5" stroke-linecap="round" />
+    <path d="M 185 152 L 200 144" stroke="#d4a373" stroke-width="2.5" stroke-linecap="round" />
+
+  </svg>
+</template>
+
+<style scoped>
+.assetnode-logo {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+</style>

@@ -1,0 +1,382 @@
+
+
+#assetnode-autopilot-log {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 380px;
+  max-height: 320px;
+  z-index: 999999;
+  background: #12141a;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 12px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(99, 102, 241, 0.1);
+  overflow: hidden;
+  animation: autopilot-panel-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+#assetnode-autopilot-log.minimized {
+  max-height: 40px;
+}
+
+#assetnode-autopilot-log.minimized .autopilot-log-body {
+  display: none;
+}
+
+.autopilot-log-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(99, 102, 241, 0.08);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.autopilot-log-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #e0e0e0;
+  flex: 1;
+}
+
+.autopilot-log-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.15);
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  animation: autopilot-badge-pulse 2s ease-in-out infinite;
+}
+
+.autopilot-log-badge.complete {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  animation: none;
+}
+
+.autopilot-log-minimize {
+  background: none;
+  border: none;
+  color: #8b8d93;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.autopilot-log-minimize:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.autopilot-log-body {
+  overflow-y: auto;
+  padding: 8px 0;
+  flex: 1;
+  max-height: 260px;
+}
+
+.autopilot-log-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.autopilot-log-body::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 2px;
+}
+
+.autopilot-log-entry {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  animation: autopilot-log-flash 0.3s ease;
+}
+
+.autopilot-log-time {
+  color: #555;
+  font-size: 10px;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  white-space: nowrap;
+  padding-top: 1px;
+}
+
+.autopilot-log-icon {
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.autopilot-log-message {
+  color: #b0b3b8;
+  word-break: break-word;
+}
+
+.autopilot-log-success .autopilot-log-message { color: #10b981; }
+.autopilot-log-warn .autopilot-log-message { color: #f59e0b; }
+.autopilot-log-error .autopilot-log-message { color: #ef4444; }
+
+
+#assetnode-autopilot-countdown {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000000;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: autopilot-fade-in 0.2s ease;
+}
+
+.autopilot-countdown-content {
+  background: #1a1d23;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  border-radius: 16px;
+  padding: 32px 40px;
+  text-align: center;
+  max-width: 420px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(99, 102, 241, 0.1);
+  animation: autopilot-countdown-enter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.autopilot-countdown-nerd {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.autopilot-countdown-text {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 15px;
+  color: #b0b3b8;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.autopilot-countdown-timer {
+  font-family: 'SF Mono', 'Monaco', monospace;
+  font-size: 56px;
+  font-weight: 800;
+  color: #6366f1;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+}
+
+.autopilot-countdown-cancel {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.autopilot-countdown-cancel:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: translateY(-1px);
+}
+
+
+#assetnode-autopilot-report {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000001;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: autopilot-fade-in 0.3s ease;
+}
+
+.autopilot-report-card {
+  background: #1a1d23;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 520px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 40px rgba(99, 102, 241, 0.1);
+  animation: autopilot-countdown-enter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.autopilot-report-header {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.autopilot-report-subtitle {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 14px;
+  color: #8b8d93;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.autopilot-report-credentials {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.autopilot-report-cred-row {
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.autopilot-report-cred-label {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6366f1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.autopilot-report-cred-value {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  font-size: 13px;
+  color: #e0e0e0;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 10px;
+  border-radius: 6px;
+  word-break: break-all;
+  user-select: all;
+}
+
+.autopilot-report-copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.autopilot-report-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.autopilot-report-empty {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 14px;
+  color: #8b8d93;
+  text-align: center;
+  padding: 20px;
+}
+
+.autopilot-report-warnings {
+  margin-bottom: 20px;
+  padding: 12px;
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 10px;
+}
+
+.autopilot-report-warn-title {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #f59e0b;
+  margin-bottom: 8px;
+}
+
+.autopilot-report-warn-item {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 12px;
+  color: #d4a029;
+  line-height: 1.6;
+  padding-left: 12px;
+  position: relative;
+}
+
+.autopilot-report-warn-item::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+}
+
+.autopilot-report-close {
+  display: block;
+  width: 100%;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.autopilot-report-close:hover {
+  background: linear-gradient(135deg, #7c7ff7 0%, #9d75f8 100%);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+  transform: translateY(-1px);
+}
+
+
+@keyframes autopilot-panel-enter {
+  0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes autopilot-fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes autopilot-countdown-enter {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes autopilot-badge-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes autopilot-log-flash {
+  0% { background: rgba(99, 102, 241, 0.1); }
+  100% { background: transparent; }
+}
