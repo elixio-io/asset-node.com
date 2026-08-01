@@ -80,6 +80,11 @@ report or a design proposal instead — that is genuinely valuable and carries n
 
 ## Automated and AI-assisted contributions
 
+**Point your agent at [AGENTS.md](AGENTS.md) first.** It carries the commands, the architecture map, and the
+non-obvious constraints — soft-deleted rows still occupying unique indexes, Mongoose never altering an
+existing index, tenancy scoping — that an agent cannot infer from the source and will otherwise get wrong
+with confidence.
+
 AI-assisted pull requests are welcome. They are held to exactly the same bar as any other, plus two rules:
 
 1. **A human signs off and is accountable.** The `Signed-off-by` line must be a person who has read the diff,

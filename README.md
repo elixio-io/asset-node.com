@@ -92,6 +92,9 @@ Prefer not to run it yourself? The [hosted version](https://app.asset-node.com) 
 Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md). Start with issues labelled
 [`good first issue`](https://github.com/elixio-io/asset-node.com/labels/good%20first%20issue).
 
+Working with an AI coding agent? [AGENTS.md](AGENTS.md) has the build commands, architecture map, and the
+repository-specific traps that have each caused a production incident here.
+
 Mirrors: [GitHub](https://github.com/elixio-io/asset-node.com) · [Codeberg](https://codeberg.org/elixio/asset-node.com).
 Both are kept in sync; open issues and pull requests on whichever you prefer.
 
