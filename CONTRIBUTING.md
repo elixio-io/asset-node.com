@@ -70,8 +70,8 @@ alone grants. So, by signing off a commit (`git commit -s`), you certify the
    commercially licensed or Enterprise versions of AssetNode**.
 3. You retain full copyright in your contribution and remain free to use it however you like elsewhere.
 
-This is a standard arrangement for commercially maintained open projects. We are stating it plainly because you deserve
-to know what you are agreeing to before you spend your time — not after.
+This is a standard arrangement for commercially maintained open projects. We are stating it plainly because
+you deserve to know what you are agreeing to before you spend your time — not after.
 
 If your employer owns your work output, get their sign-off before contributing.
 
