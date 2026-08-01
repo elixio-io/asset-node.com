@@ -101,12 +101,6 @@ function navigate(to: string) {
       </div>
 
       <div class="pub-nav-actions">
-        <Button
-          :icon="themeStore.isDark ? 'pi pi-sun' : 'pi pi-moon'"
-          text rounded severity="secondary" size="small"
-          @click="themeStore.toggle()"
-          class="pub-nav-theme-btn"
-        />
         <a class="pub-nav-signin" @click="router.push('/sign-in')">Sign In</a>
         <Button
           label="Get Started"

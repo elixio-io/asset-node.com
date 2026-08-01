@@ -5,7 +5,17 @@ type ThemeMode = 'light' | 'dark' | 'system'
 
 const STORAGE_KEY = 'hw-manager-theme'
 
+// Mirrors FORCE_DARK in the store. While the light theme is unfinished, dark is
+// pinned on and the toggle is removed from both navbars.
+const FORCE_DARK = true
+
 function resolveIsDark(mode: ThemeMode, systemPrefersDark: boolean): boolean {
+  if (FORCE_DARK) return true
+  if (mode === 'system') return systemPrefersDark
+  return mode === 'dark'
+}
+
+function resolveIsDarkUnpinned(mode: ThemeMode, systemPrefersDark: boolean): boolean {
   if (mode === 'system') return systemPrefersDark
   return mode === 'dark'
 }
@@ -30,23 +40,36 @@ function toggleMode(current: ThemeMode): ThemeMode {
 
 
 describe('Theme Store — Pure Logic', () => {
-  describe('isDark resolution', () => {
-    it('dark mode → always dark', () => {
+  describe('isDark resolution (dark pinned)', () => {
+    it('stays dark whatever the stored mode says', () => {
+      expect(resolveIsDark('light', false)).toBe(true)
       expect(resolveIsDark('dark', false)).toBe(true)
-      expect(resolveIsDark('dark', true)).toBe(true)
+      expect(resolveIsDark('system', false)).toBe(true)
+    })
+
+    it('ignores an OS preference for light', () => {
+      expect(resolveIsDark('system', false)).toBe(true)
+      expect(resolveIsDark('light', false)).toBe(true)
+    })
+  })
+
+  describe('isDark resolution (once the light theme is finished)', () => {
+    it('dark mode → always dark', () => {
+      expect(resolveIsDarkUnpinned('dark', false)).toBe(true)
+      expect(resolveIsDarkUnpinned('dark', true)).toBe(true)
     })
 
     it('light mode → always light', () => {
-      expect(resolveIsDark('light', false)).toBe(false)
-      expect(resolveIsDark('light', true)).toBe(false)
+      expect(resolveIsDarkUnpinned('light', false)).toBe(false)
+      expect(resolveIsDarkUnpinned('light', true)).toBe(false)
     })
 
     it('system mode → follows OS preference (dark)', () => {
-      expect(resolveIsDark('system', true)).toBe(true)
+      expect(resolveIsDarkUnpinned('system', true)).toBe(true)
     })
 
     it('system mode → follows OS preference (light)', () => {
-      expect(resolveIsDark('system', false)).toBe(false)
+      expect(resolveIsDarkUnpinned('system', false)).toBe(false)
     })
   })
 

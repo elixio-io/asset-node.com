@@ -3,7 +3,6 @@ import { ref, computed, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '../../stores/auth'
-import { useThemeStore } from '../../stores/theme'
 import { useOnboardingTour } from '../../composables/useOnboardingTour'
 import { setLocale, getLocale, SUPPORTED_LOCALES, type SupportedLocale } from '../../i18n'
 import Avatar from 'primevue/avatar'
@@ -22,7 +21,6 @@ const emit = defineEmits<{
 const router = useRouter()
 const route = useRoute()
 const authStore = useAuthStore()
-const themeStore = useThemeStore()
 const { t } = useI18n()
 const miniDrawer = ref(false)
 const currentLocale = ref(getLocale())
@@ -326,17 +324,6 @@ watch(() => route.path, () => {
           class="sidebar-action-btn"
         />
         <Menu ref="localeMenuRef" :model="localeMenuItems" :popup="true" />
-
-        <Button
-          :icon="themeStore.icon"
-          text
-          rounded
-          severity="secondary"
-          size="small"
-          v-tooltip.top="themeStore.label"
-          @click="themeStore.toggle()"
-          class="sidebar-action-btn"
-        />
       </div>
 
       <button
