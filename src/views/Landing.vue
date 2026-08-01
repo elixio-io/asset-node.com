@@ -52,6 +52,12 @@ function onCineScroll() {
   cineRaf = requestAnimationFrame(driveVignettes)
 }
 
+const REPO_URL = 'https://github.com/elixio-io/asset-node.com'
+
+function openRepo() {
+  window.open(REPO_URL, '_blank', 'noopener')
+}
+
 onMounted(() => {
   observerRef.value = new IntersectionObserver(
     (entries) => {
@@ -253,6 +259,17 @@ const onMouseMove = (e: MouseEvent) => {
       </div>
 
       <div class="hero-content">
+        <a
+          class="hero-announce reveal"
+          href="https://github.com/elixio-io/asset-node.com"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="hero-announce-tag">New</span>
+          AssetNode is now open source
+          <i class="pi pi-arrow-right" />
+        </a>
+
         <h1 class="hero-h1 reveal">
           Don't leave your<br/>
           <span class="hero-h1-gradient">IT operations</span> in the dark
@@ -269,7 +286,7 @@ const onMouseMove = (e: MouseEvent) => {
         </div>
 
         <div class="hero-proof reveal">
-          <span class="hero-proof-item"><i class="pi pi-check-circle" /> Free forever — 100 assets</span>
+          <span class="hero-proof-item"><i class="pi pi-check-circle" /> Open source — self-host free</span>
           <span class="hero-proof-item"><i class="pi pi-check-circle" /> Setup in under 5 minutes</span>
           <span class="hero-proof-item"><i class="pi pi-check-circle" /> 🇩🇪 Hosted in Germany</span>
         </div>
@@ -636,6 +653,74 @@ const onMouseMove = (e: MouseEvent) => {
       </div>
     </section>
 
+    <section id="open-source" class="oss-section cine-section">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <p class="section-eyebrow">OPEN SOURCE</p>
+          <h2 class="section-h2">Read the code. <span class="text-gradient">Run it yourself.</span></h2>
+          <p class="section-p">
+            AssetNode is fair-code under the Sustainable Use License. Self-host it for your own company,
+            free and unlimited — or let us run it for you.
+          </p>
+        </div>
+
+        <div class="oss-grid reveal">
+          <div class="oss-card">
+            <div class="oss-card-head">
+              <i class="pi pi-server" />
+              <h3>Self-hosted</h3>
+            </div>
+            <p class="oss-price">Free forever</p>
+            <ul class="oss-list">
+              <li><i class="pi pi-check" /> Unlimited assets and users</li>
+              <li><i class="pi pi-check" /> Your infrastructure, your data</li>
+              <li><i class="pi pi-check" /> Full source access — audit and extend it</li>
+              <li><i class="pi pi-check" /> Community support via issues</li>
+            </ul>
+            <Button
+              label="Deploy it yourself"
+              icon="pi pi-github"
+              size="large"
+              outlined
+              class="oss-btn-ghost"
+              @click="openRepo"
+            />
+          </div>
+
+          <div class="oss-card oss-card--accent">
+            <div class="oss-card-head">
+              <i class="pi pi-cloud" />
+              <h3>Cloud</h3>
+            </div>
+            <p class="oss-price">Free up to 100 assets</p>
+            <ul class="oss-list">
+              <li><i class="pi pi-check" /> Zero maintenance — we run it</li>
+              <li><i class="pi pi-check" /> 🇩🇪 Hosted in Germany, GDPR-native</li>
+              <li><i class="pi pi-check" /> Automatic updates and backups</li>
+              <li><i class="pi pi-check" /> Priority support and SLAs</li>
+            </ul>
+            <Button
+              label="Start free"
+              icon="pi pi-arrow-right"
+              iconPos="right"
+              size="large"
+              class="hero-btn-primary"
+              @click="router.push('/sign-up')"
+            />
+          </div>
+        </div>
+
+        <p class="oss-note reveal">
+          Mirrored on
+          <a href="https://github.com/elixio-io/asset-node.com" target="_blank" rel="noopener">GitHub</a>
+          and
+          <a href="https://codeberg.org/elixio/asset-node.com" target="_blank" rel="noopener">Codeberg</a>.
+          Contributions welcome — start with a
+          <a href="https://github.com/elixio-io/asset-node.com/labels/good%20first%20issue" target="_blank" rel="noopener">good first issue</a>.
+        </p>
+      </div>
+    </section>
+
     <section class="cta-section">
       <div class="cta-mesh" />
       <div class="cta-inner reveal">
@@ -661,8 +746,10 @@ const onMouseMove = (e: MouseEvent) => {
             <AssetNodeLogo :size="22" />
             <p class="footer-desc">Modern IT asset management for growing companies. Track, manage, and automate — all in one platform.</p>
             <div class="footer-socials">
-              <a href="https://linkedin.com" target="_blank"><i class="pi pi-linkedin" /></a>
-              <a href="https://github.com/elixio-io/asset-node.com" target="_blank"><i class="pi pi-github" /></a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="pi pi-linkedin" /></a>
+              <a href="https://github.com/elixio-io/asset-node.com" target="_blank" rel="noopener" aria-label="GitHub"><i class="pi pi-github" /></a>
+              <a href="https://codeberg.org/elixio/asset-node.com" target="_blank" rel="noopener" aria-label="Codeberg"><i class="pi pi-code" /></a>
+              <a href="https://bsky.app/profile/elixio.bsky.social" target="_blank" rel="noopener" aria-label="Bluesky"><i class="pi pi-cloud" /></a>
             </div>
           </div>
           <div class="footer-col">
@@ -1224,6 +1311,53 @@ const onMouseMove = (e: MouseEvent) => {
   background: var(--an-text-muted); opacity: 0.3; transition: all 0.3s;
 }
 .testi-dot--active { opacity: 1; background: var(--accent); width: 24px; border-radius: 4px; }
+
+/* ── Open source ─────────────────────────────────────────────────────────── */
+.hero-announce {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 6px 16px 6px 6px; margin-bottom: 28px;
+  border: 1px solid var(--an-border-dark); border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  color: var(--an-text-muted); font-size: 14px; font-weight: 500;
+  text-decoration: none; cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+.hero-announce:hover { border-color: var(--an-primary); background: rgba(255,255,255,0.07); color: #fff; }
+.hero-announce .pi-arrow-right { font-size: 12px; transition: transform .2s ease; }
+.hero-announce:hover .pi-arrow-right { transform: translateX(3px); }
+.hero-announce-tag {
+  padding: 3px 10px; border-radius: 999px;
+  background: var(--an-primary); color: #04170d;
+  font-size: 12px; font-weight: 700; letter-spacing: .02em;
+}
+
+.oss-section { padding: 140px 0; }
+.oss-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+  max-width: 900px; margin: 0 auto;
+}
+.oss-card {
+  display: flex; flex-direction: column;
+  padding: 36px 32px; border-radius: 18px;
+  border: 1px solid var(--an-border-dark); background: rgba(255,255,255,0.02);
+}
+.oss-card--accent { border-color: var(--an-primary); background: rgba(74,222,128,0.05); }
+.oss-card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.oss-card-head i { font-size: 20px; color: var(--an-primary); }
+.oss-card-head h3 { font-size: 20px; font-weight: 700; margin: 0; }
+.oss-price { font-size: 15px; color: var(--an-text-muted); margin: 0 0 24px; }
+.oss-list { list-style: none; padding: 0; margin: 0 0 32px; display: flex; flex-direction: column; gap: 12px; }
+.oss-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; line-height: 1.5; }
+.oss-list .pi-check { color: var(--an-primary); font-size: 13px; margin-top: 4px; flex-shrink: 0; }
+.oss-card .p-button { margin-top: auto; width: 100%; justify-content: center; }
+.oss-note { text-align: center; margin-top: 40px; font-size: 15px; color: var(--an-text-muted); }
+.oss-note a { color: var(--an-primary); text-decoration: none; }
+.oss-note a:hover { text-decoration: underline; }
+
+@media (max-width: 860px) {
+  .oss-grid { grid-template-columns: 1fr; }
+  .oss-section { padding: 90px 0; }
+}
 
 .integ-section { padding: 140px 0; }
 .integ-grid {
