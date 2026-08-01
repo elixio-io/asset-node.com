@@ -154,7 +154,7 @@ function startCounters() {
 const activeTestimonial = ref(0)
 const testimonials = [
   { quote: 'Become an early adopter and help us redefine how mid-sized companies manage their hardware. Your feedback shapes our roadmap.', name: 'Your Name', role: 'IT-Lead', company: 'Your Company', avatar: '/assets/landing/testimonial-avatar.jpg' },
-  { quote: 'Become a contributer help us improve how mid-sized companies manage their hardware. Your help is appreciated.', name: 'Your Name', role: 'IT-Lead', company: 'Your Company', avatar: '/assets/landing/testimonial-avatar.jpg' },
+  { quote: 'Become a contributor and help us improve how mid-sized companies manage their hardware. The code is open — your first pull request is welcome.', name: 'Your Name', role: 'IT-Lead', company: 'Your Company', avatar: '/assets/landing/testimonial-avatar.jpg' },
   { quote: 'Are you tired of spreadsheet chaos? Partner with us to build the exact features your finance and IT teams actually need.', name: 'Your Name', role: 'CFO', company: 'Your Company', avatar: '/assets/landing/testimonial-avatar.jpg' },
 ]
 

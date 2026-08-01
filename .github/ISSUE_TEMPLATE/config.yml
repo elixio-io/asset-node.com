@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/elixio-io/asset-node.com/blob/main/SECURITY.md
+    about: Do not open a public issue. Report privately — see our security policy.
+  - name: Contributing guide
+    url: https://github.com/elixio-io/asset-node.com/blob/main/CONTRIBUTING.md
+    about: Setup, standards, and the licensing terms your contribution is made under.
+  - name: Working with an AI coding agent
+    url: https://github.com/elixio-io/asset-node.com/blob/main/AGENTS.md
+    about: Build commands, architecture map, and repository-specific traps.
+  - name: Commercial or Enterprise licence
+    url: mailto:alexander.vonhohnhorst@elixio.io
+    about: Hosting AssetNode for third parties, or terms the Sustainable Use License does not cover.

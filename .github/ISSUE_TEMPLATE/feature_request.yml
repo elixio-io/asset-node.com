@@ -1,0 +1,47 @@
+name: Feature request
+description: Suggest a capability AssetNode does not have yet
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: >
+        Describe the situation, not the solution. Understanding the underlying problem often
+        surfaces a better answer than the one originally proposed.
+      placeholder: >
+        When someone leaves, I have to check four systems by hand to work out what they still hold,
+        and things get missed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like it to do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What are you doing instead today?
+      description: Workarounds, other tools, or manual process. This helps judge how much pain the gap actually causes.
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Who does this affect?
+      options:
+        - Just me / my organisation
+        - Probably common for teams like mine
+        - I think most AssetNode users would want this
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I would be willing to work on this myself

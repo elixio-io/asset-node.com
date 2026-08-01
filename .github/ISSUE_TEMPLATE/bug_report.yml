@@ -1,0 +1,76 @@
+name: Bug report
+description: Something behaves incorrectly
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file this.
+
+        **Security vulnerability?** Do not file it here — see [SECURITY.md](../blob/main/SECURITY.md).
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you observe? Include the exact error message or HTTP status if there was one.
+      placeholder: Creating an asset without a serial number returns 409 "Serial number or asset tag already exists".
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps someone can follow on a clean install. This is the single most useful part of the report.
+      placeholder: |
+        1. Go to Assets → Add asset
+        2. Fill in model and category, leave serial number empty
+        3. Save — works
+        4. Repeat with a second asset, leaving serial number empty
+        5. Save — returns 409
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: true
+
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: How are you running AssetNode?
+      options:
+        - Self-hosted
+        - Cloud (app.asset-node.com)
+        - Local development
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Output of `git rev-parse --short HEAD`, or the release you are on.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs or console output
+      description: Server logs, browser console, or network response. Redact tokens and personal data first.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues and this is not a duplicate
+          required: true
+        - label: I have removed any credentials or personal data from the details above
+          required: true

@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # Lets Renovate and contributors re-run a red build without an empty commit.
+  workflow_dispatch:
+
+# A new push to the same PR cancels the previous run — dependency bots open
+# several PRs at once and there is no value in finishing superseded builds.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: test · typecheck · build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Test
+        run: npm test
+
+      # vue-tsc and vite build fail on different things: vue-tsc misses some
+      # template-only errors, and the build misses type errors in unreferenced
+      # code. Passing one is not evidence for the other, so both run.
+      - name: Typecheck
+        run: npx vue-tsc --noEmit -p tsconfig.json
+
+      - name: Build
+        run: npx vite build
