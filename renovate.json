@@ -1,0 +1,82 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "timezone": "Europe/Berlin",
+  "schedule": ["before 6am on monday"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "labels": ["dependencies"],
+  "rangeStrategy": "bump",
+  "rebaseWhen": "conflicted",
+
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on the first day of the month"]
+  },
+
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["dependencies", "security"],
+    "schedule": ["at any time"],
+    "prPriority": 10,
+    "minimumReleaseAge": null
+  },
+  "osvVulnerabilityAlerts": true,
+
+  "minimumReleaseAge": "3 days",
+
+  "packageRules": [
+    {
+      "description": "Group all non-major devDependencies into one PR — low risk, high volume.",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "devDependencies (non-major)"
+    },
+    {
+      "description": "Group type definitions; they move constantly and rarely break anything alone.",
+      "matchPackageNames": ["@types/**"],
+      "groupName": "type definitions"
+    },
+    {
+      "description": "Vue ecosystem moves in lockstep — upgrading one without the others breaks builds.",
+      "matchPackageNames": ["vue", "vue-router", "vue-tsc", "@vitejs/plugin-vue", "vite"],
+      "groupName": "vue + vite"
+    },
+    {
+      "description": "PrimeVue and its theming are tightly coupled.",
+      "matchPackageNames": ["primevue", "primeicons", "@primevue/**", "@primeuix/**"],
+      "groupName": "primevue"
+    },
+    {
+      "description": "Fastify core and its plugins must move together.",
+      "matchPackageNames": ["fastify", "@fastify/**"],
+      "groupName": "fastify"
+    },
+    {
+      "description": "Mongoose majors change query and index semantics — never batch these.",
+      "matchPackageNames": ["mongoose", "mongodb"],
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "addLabels": ["needs-manual-review"]
+    },
+    {
+      "description": "Majors always land alone and are never auto-merged.",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "addLabels": ["needs-manual-review"]
+    },
+    {
+      "description": "Pin the Node major to what the Dockerfile actually runs.",
+      "matchPackageNames": ["node"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ],
+
+  "_comment_automerge": "Automerge is deliberately OFF everywhere. Renovate merging green PRs is only safe when CI actually runs the suite on each PR; there is no CI pipeline in this repo yet. Once a workflow runs `npm test` and `vue-tsc --noEmit` on pull requests, enable automerge for the devDependencies and type-definition groups first."
+}
