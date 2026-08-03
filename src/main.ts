@@ -10,6 +10,8 @@ import ConfirmationService from 'primevue/confirmationservice'
 import Tooltip from 'primevue/tooltip'
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
+// PrimeVue core styles required by v4
+import 'primevue/resources/primevue.min.css'
 
 import App from './App.vue'
 import './style.css'
@@ -29,6 +31,10 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(i18n)
+// Note: PrimeVue v4 introduced changes to theme handling (SASS-based themes).
+// This app uses @primevue/themes Aura preset. If you see styling regressions, you may need
+// to switch to the CSS theme import or rebuild SASS according to the migration guide:
+// https://primefaces.org/primevue/migration-v4
 app.use(PrimeVue, {
   theme: {
     preset: Aura,
