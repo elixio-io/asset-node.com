@@ -3,8 +3,6 @@
 Copyright © 2026 Elixio UG (haftungsbeschränkt), Bonn, Germany.
 
 Portions of this software are licensed as follows:
-
-- Content of branches other than the main branch (i.e. "main") is not licensed.
 - Source code files that contain `.ee.` in their filename or `.ee` in their dirname are NOT licensed under
   the Sustainable Use License. To use those files you must hold a valid AssetNode Enterprise License
   specifically allowing you access to such source code files.
